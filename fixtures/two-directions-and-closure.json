@@ -1,0 +1,208 @@
+{
+  "facts": {
+    "terminals": [
+      {
+        "id": "museum",
+        "operator": "heritage",
+        "site": "museum-door",
+        "locales": [
+          "zh",
+          "en"
+        ],
+        "icons": [
+          "walk",
+          "lift"
+        ]
+      },
+      {
+        "id": "fork-v1",
+        "operator": "quarter",
+        "site": "fork",
+        "locales": [
+          "zh"
+        ],
+        "icons": [
+          "walk"
+        ]
+      },
+      {
+        "id": "fork-v2",
+        "operator": "quarter",
+        "site": "fork",
+        "locales": [
+          "zh",
+          "en"
+        ],
+        "icons": [
+          "walk",
+          "lift"
+        ]
+      },
+      {
+        "id": "station",
+        "operator": "rail",
+        "site": "rail-exit",
+        "locales": [
+          "zh",
+          "en"
+        ],
+        "icons": [
+          "walk",
+          "lift"
+        ]
+      }
+    ],
+    "routes": [
+      {
+        "id": "east",
+        "sites": [
+          "museum-door",
+          "fork",
+          "rail-exit"
+        ],
+        "links": [
+          "m-f",
+          "f-r"
+        ],
+        "accessible": false,
+        "hours": [
+          480,
+          1050
+        ]
+      },
+      {
+        "id": "west",
+        "sites": [
+          "rail-exit",
+          "fork",
+          "museum-door"
+        ],
+        "links": [
+          "r-f",
+          "f-m"
+        ],
+        "accessible": false,
+        "hours": [
+          480,
+          1050
+        ]
+      }
+    ],
+    "baseline": {
+      "revision": "street/31",
+      "locales": {
+        "zh": "沿石廊直行",
+        "en": "Follow the arcade"
+      },
+      "usable_until": 624
+    },
+    "operators": {
+      "changes": {
+        "f-r": "quarter"
+      },
+      "translations": {
+        "f-r": "rail"
+      },
+      "field": {
+        "museum-door": "heritage"
+      }
+    }
+  },
+  "events": [
+    {
+      "at": 581,
+      "kind": "publish",
+      "operator": "quarter",
+      "revision": "quarter/32",
+      "hours": [
+        610,
+        900
+      ],
+      "route": "east",
+      "link": "f-r",
+      "alternate": "lift-alley",
+      "icon": "lift"
+    },
+    {
+      "at": 583,
+      "kind": "publish",
+      "operator": "rail",
+      "revision": "rail/12",
+      "hours": [
+        606,
+        920
+      ],
+      "route": "east",
+      "link": "f-r",
+      "locales": {
+        "zh": "沿升降梯巷",
+        "en": "Take the lift passage"
+      }
+    },
+    {
+      "at": 584,
+      "kind": "device_report",
+      "screen": "fork-v2",
+      "revision": "quarter/32",
+      "state": "installed",
+      "usable_until": 630
+    },
+    {
+      "at": 590,
+      "kind": "device_report",
+      "screen": "museum",
+      "revision": "street/31",
+      "state": "displaying",
+      "usable_until": 624
+    },
+    {
+      "at": 591,
+      "kind": "offline",
+      "screen": "museum"
+    },
+    {
+      "at": 599,
+      "kind": "closure",
+      "operator": "quarter",
+      "link": "f-r",
+      "from_at": 599,
+      "until": 710
+    },
+    {
+      "at": 604,
+      "kind": "withdraw",
+      "operator": "rail",
+      "revision": "rail/12"
+    },
+    {
+      "at": 611,
+      "kind": "device_report",
+      "screen": "museum",
+      "revision": "quarter/32",
+      "state": "installed",
+      "usable_until": 630
+    },
+    {
+      "at": 615,
+      "kind": "reconnect",
+      "screen": "museum"
+    },
+    {
+      "at": 619,
+      "kind": "field_disabled",
+      "screen": "museum",
+      "operator": "heritage"
+    }
+  ],
+  "exchanges": [
+    {
+      "method": "PUT",
+      "path": "/screens/{id}/configuration",
+      "match": {},
+      "status": 202,
+      "response": {
+        "state": "received"
+      }
+    }
+  ]
+}

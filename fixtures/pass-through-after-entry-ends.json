@@ -1,0 +1,123 @@
+{
+  "facts": {
+    "terminals": [
+      {
+        "id": "east-entry",
+        "operator": "rail",
+        "site": "east",
+        "locales": [
+          "zh"
+        ],
+        "icons": [
+          "walk"
+        ]
+      },
+      {
+        "id": "mid",
+        "operator": "quarter",
+        "site": "middle",
+        "locales": [
+          "zh"
+        ],
+        "icons": [
+          "walk",
+          "lift"
+        ]
+      },
+      {
+        "id": "exit",
+        "operator": "heritage",
+        "site": "gate",
+        "locales": [
+          "zh"
+        ],
+        "icons": [
+          "walk",
+          "lift"
+        ]
+      }
+    ],
+    "routes": [
+      {
+        "id": "to-gate",
+        "sites": [
+          "east",
+          "middle",
+          "gate"
+        ],
+        "links": [
+          "e-m",
+          "m-g"
+        ],
+        "accessible": true,
+        "hours": [
+          450,
+          940
+        ]
+      }
+    ],
+    "baseline": {
+      "revision": "quarter/5",
+      "locales": {
+        "zh": "穿过檐廊后由南门退出"
+      },
+      "usable_until": 940
+    },
+    "operators": {
+      "entry": {
+        "east": "rail"
+      },
+      "field": {
+        "middle": "quarter",
+        "gate": "heritage"
+      }
+    }
+  },
+  "events": [
+    {
+      "at": 880,
+      "kind": "publish",
+      "operator": "rail",
+      "revision": "rail/8",
+      "hours": [
+        900,
+        940
+      ],
+      "route": "to-gate",
+      "stop_entry_at": 910
+    },
+    {
+      "at": 884,
+      "kind": "device_report",
+      "screen": "mid",
+      "revision": "quarter/5",
+      "state": "displaying",
+      "usable_until": 940
+    },
+    {
+      "at": 907,
+      "kind": "device_report",
+      "screen": "east-entry",
+      "revision": "rail/8",
+      "state": "displaying",
+      "usable_until": 910
+    },
+    {
+      "at": 912,
+      "kind": "query",
+      "site": "middle",
+      "direction": "to-gate"
+    }
+  ],
+  "exchanges": [
+    {
+      "method": "PUT",
+      "path": "/screens/{id}/configuration",
+      "match": {},
+      "status": 202,
+      "response": {
+        "state": "received"
+      }
+    }
+  ]
+}
